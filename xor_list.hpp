@@ -1,3 +1,6 @@
+#ifndef XOR_LIST_HPP
+#define XOR_LIST_HPP
+
 #include <iostream>
 
 
@@ -41,3 +44,7 @@ class XorList {
 
 template<typename T>
 std::ostream& operator<<(std::ostream& out, const XorList<T>& xor_list);
+
+#include "xor_list.cpp"
+
+#endif //XOR_LIST_HPP
