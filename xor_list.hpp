@@ -2,44 +2,59 @@
 #define XOR_LIST_HPP
 
 #include <iostream>
+#include <utility>
 
 
 template <class T>
 class Node {
   public:
     T val;
-    uintptr_t pointer;
+    Node<T> *pointer;
 
-    Node(); // TODO
-    Node(T value); // TODO
+    Node() : val() {
+      pointer = 0;
+    }
+    Node(T value): val(value) {
+      pointer = 0;
+    }
 };
 
 
 template <class T>
 class XorList {
   public:
-    XorList(); // TODO
-    ~XorList(); // TODO
+    XorList() {
+      first = nullptr;
+      last = nullptr;
+    }
+    ~XorList() {
+      clean();
+    }
 
-    XorList(const XorList &other); // TODO
-    XorList(XorList &&other); // TODO
+    XorList(const XorList &other);
+    XorList(XorList &&other) noexcept;
 
-    XorList& operator=(const XorList &other); // TODO
-    XorList& operator=(XorList &&other); // TODO
+    XorList& operator=(const XorList &other);
+    XorList& operator=(XorList &&other) noexcept;
     
-    XorList& insert_back(const T& node_value); // TODO
-    XorList& insert_front(T&& node_value); // TODO
+    XorList& insert_back(const T& node_value);
+    XorList& insert_front(T&& node_value);
 
-    XorList& erase_back(); // TODO
-    XorList& erase_front(); // TODO
+    XorList& erase_back();
+    XorList& erase_front();
 
-    XorList& merge(const XorList& other); // TODO
-    XorList& merge(XorList&& other); // TODO
+    XorList& merge(const XorList& other);
+    XorList& merge(XorList&& other);
 
-    bool empty(); // TODO
+    bool empty() const {
+      return first==nullptr;
+    }
 
-  private:
-    Node<T>* first, last;
+    static Node<T>* xor_pointer(Node<T> *one, Node<T> *two);
+
+    Node<T>* first, *last;
+    void clean();
+
 };
 
 template<typename T>
